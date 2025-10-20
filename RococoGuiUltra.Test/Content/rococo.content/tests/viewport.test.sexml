@@ -1,0 +1,145 @@
+// The schemes are quite large, so we move them into their sexml file, which we insert into the GreatSex def here
+(Insert
+	(Path "!tests/greatsex.scheme.sexml")
+)
+
+// The frame element navigates up the owner branch until the frame is found and then sets the attributes specified in the sexml
+(Frame
+	(Colour.Container.Background Transparent)
+)
+
+// The frame element navigates up the owner branch until the frame is found and then sets the attributes of the ClientArea specified in the sexml
+(Frame.ClientArea
+	(Colour.Background Transparent)
+	(Colour.Container.Background Transparent)
+)
+
+// Define a nice large font, keyed by the id.
+(Font 
+	(Id TitleFont)
+	(Family Arial)
+	(Height 32)
+	([] Mods Bold)
+)
+
+(Font 
+	(Id OptionButtonFont)
+	(Family Arial)
+	(Height 24)
+	([] Mods Bold)
+)
+
+(Font 
+	(Id SubOptionTitleFont)
+	(Family Arial)
+	(Height 18)
+	([] Mods Bold)
+)
+
+(Font 
+	(Id CarouselFont)
+	(Family Arial)
+	(Height 16)
+	([] Mods Bold)
+)
+
+(Font 
+	(Id HintFont)
+	(Family Arial)
+	(Height 20)
+	([] Mods Bold)
+)
+
+(Font 
+	(Id PromptFont)
+	(Family Arial)
+	(Height 20)
+	([] Mods Bold)
+)
+
+
+(Div
+// Panel descriptions serve as comments and also provide debugging information by marking a panel with a text string
+	(Panel.Description OutermostDiv)
+	
+	// TopToBottom layout layouts out children vertically with the first child starting at the top line
+	(Panel.Layout TopToBottom)
+	
+	// Child padding specifies the number of pixels betwen children
+	(Panel.ChildPadding 4)
+	
+	// Expand the panel horizontally and vertically to match the parent.
+	(Panel.ExpandH)
+	(Panel.ExpandV)
+	
+	(Colour.Container.Background DarkGrey)
+	(Colour.Container.Top.Left Transparent)
+	(Colour.Container.Bottom.Right Transparent)
+	(Colour.Label.Shadow Transparent)
+	(Colour.Carousel.Background DarkRed)
+	
+	(#Recti Panel.Padding 20 20 200 200)
+	:
+	
+	(Div 
+		(Colour.Container.Background Transparent)
+		(Panel.ExpandH)
+		(Panel.FixedHeight 500)
+		:
+		// A viewport has a client area that is offset by a scroll bar. The scroll range allows us to navigate to and from any offscreen elements
+		(Viewport
+			(Panel.Description TestViewport)
+			(Colour.Background Transparent)
+			(Colour.Container.Top.Left Transparent)
+			(Colour.Container.Bottom.Right Transparent)
+			// Define the client area rect style when a vertical scroller is visible
+			(Viewport.RectStyle.Scrollable Rounded)	
+			// Define the client area rect style when the vertical scroller is invisible (scrolling not required)
+			(Viewport.Rectstyle.NotScrollable Rounded)
+			(Panel.CornerRadius 8)	
+			(Viewport.SyncDomainToChildren)
+			(Colour.Label Transparent)
+			:
+			
+			(Viewport.ClientArea
+				(Panel.Layout TopToBottom)
+				(Colour.Background Transparent)
+				(Colour.Container.Background Transparent)
+			)
+			
+			(Viewport.Offset
+				(Colour.Background Transparent)
+				(Colour.Container.Background Transparent)
+				(Colour.Container.Top.Left Transparent)
+				(Colour.Container.Bottom.Right Transparent)
+			)
+			
+			(GradientFill
+				(Panel.ExpandH)
+				(Panel.FixedHeight 100)
+				(TopLeft White)
+				(TopRight White)
+				(BottomLeft DarkBlue)
+				(BottomRight DarkRed)
+				(Fill Banner)
+			)
+			
+			(Div 
+				(Panel.Description "Range")
+				(Panel.ExpandH)
+				(Panel.FixedHeight 1800)
+			)
+			
+			
+			(GradientFill
+				(Panel.ExpandH)
+				(Panel.FixedHeight 100)
+				(TopLeft DarkBlue)
+				(TopRight DarkRed)
+				(BottomLeft White)
+				(BottomRight White)
+				(Fill Banner)
+			)
+		)
+	)
+)

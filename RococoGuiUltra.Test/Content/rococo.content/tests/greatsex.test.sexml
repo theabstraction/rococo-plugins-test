@@ -1,0 +1,754 @@
+// The schemes are quite large, so we move them into their own sexml file, which we insert into the GreatSex def here
+(Insert
+	(Path "!tests/greatsex.scheme.sexml")
+)
+
+(Zoom // This should cover 4k screens with ~90% windowed coverage or better
+	(MinWidth 3600)		
+	(MinHeight 2000)
+	
+	([] Levels 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0 3.1 3.2 3.3 3.4 3.5 4.0)
+)
+
+(Zoom // This covers extra wide HD modes
+	(MinWidth 2536)
+	(MinHeight 1280)
+	
+	([] Levels 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5)
+)
+
+(Zoom // Should suffice for ~FullHD
+	(MinWidth 1600)
+	(MinHeight 800)
+	
+	([] Levels 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8)
+)
+
+
+(Zoom // Support for zooming on legacy screens. Below this resolution users cannot zoom the window
+	(MinWidth 1024)
+	(MinHeight 650)
+	
+	([] Levels 1.0 1.1 1.2 1.3 1.4)
+)
+
+// The frame element navigates up the owner branch until the frame is found and then sets the attributes specified in the sexml
+(Frame
+	(Colour.Focus Transparent)
+	(Colour.Container.Background Transparent)
+	([] Panel.Navigate OptionCategories GameOptionsInnerDiv GameOptionsFinalization)	
+)
+
+// The frame element navigates up the owner branch until the frame is found and then sets the attributes of the ClientArea specified in the sexml
+(Frame.ClientArea
+	(Colour.Background Transparent)
+	(Colour.Container.Background Transparent)
+)
+
+// Define a nice large font, keyed by the id.
+(Font 
+	(Id TitleFont)
+	(Family Arial)
+	(Height 32)
+	([] Mods Bold)
+)
+
+(Font 
+	(Id OptionButtonFont)
+	(Family Arial)
+	(Height 24)
+	([] Mods Bold)
+)
+
+(Font 
+	(Id SubOptionTitleFont)
+	(Family Arial)
+	(Height 16)
+	([] Mods Bold)
+)
+
+(Font 
+	(Id CarouselFont)
+	(Family Arial)
+	(Height 16)
+	([] Mods Bold)
+)
+
+(Font 
+	(Id HintFont)
+	(Family Arial)
+	(Height 20)
+	([] Mods Bold)
+)
+
+(Font 
+	(Id PromptFont)
+	(Family Arial)
+	(Height 20)
+	([] Mods Bold)
+)
+
+(Font 
+	(Id SliderFont)
+	(Family Consolas)
+	(Height 11)
+)
+
+(Portrait
+// Panel descriptions serve as comments and also provide debugging information by marking a panel with a text string
+	(Panel.Description OutermostDiv)
+	
+	// TopToBottom layout layouts out children vertically with the first child starting at the top line
+	(Panel.Layout TopToBottom)
+	
+	// Child padding specifies the number of pixels betwen children
+	(Panel.ChildPadding 4)
+	
+	// Expand the panel horizontally and vertically to match the parent.
+	(Panel.ExpandH)
+	(Panel.ExpandV)
+	
+	(Colour.Container.Top.Left Transparent)
+	(Colour.Container.Bottom.Right Transparent)
+	(Colour.Label.Shadow Transparent)
+	(Colour.Carousel.Background DarkRed)
+	
+	(Image "!textures/test/AI-castle.jpg")
+	
+	(#Recti Panel.Padding 15% 10% 5% 5%)
+	:
+	
+	(GradientFill
+		(Panel.ExpandH)
+		(FitV FirstChild) // Fits the height of the banner to the height of the first child
+		(TopLeft gfTopLeft)
+		(TopRight gfTopRight)
+		(BottomLeft gfBottomLeft)
+		(BottomRight gfBottomRight)
+		(Fill Banner)
+		:
+		(Label
+			// Search for the (Font... def) at the top of the file with the given Id
+			(Font TitleFont)
+			
+			(Colour.Label Transparent)
+			
+			// Specifies the text string displayed in the label
+			(Text "Options")
+			
+			// Add top and bottom padding, so that when we fit vertically the text does not appear flush with the edges
+			(#Recti Panel.Padding 0 0 4 4)
+			
+			// Fit vertically, changes the size of the label to match the text
+			(FitV true)
+			
+			// Expand the label horizontally to the full span of its parent
+			(Panel.ExpandH)
+		)
+	)
+	
+	(Div
+		(Panel.Description TitleVSpacer)
+		(Panel.FixedWidth 40)
+		(Panel.FixedHeight 5%)
+		
+		(Colour.Background Transparent)
+		(Colour.Container.Background Transparent)
+	)
+		
+	// Divs are divisions with minimal implementation. They are used to layout controls horizontally or vertically and render a background and edge. They do little else
+	(Div 
+		// Panel descriptions serve as comments and also provide debugging information by marking a panel with a text string
+		(Panel.Description CentreFrame)
+		
+		// TopToBottom layout layouts out children vertically with the first child starting at the top line
+		(Panel.Layout LeftToRight)
+		
+		(Colour.Container.Background Transparent)
+		(Colour.Container.Top.Left Transparent)
+		(Colour.Container.Bottom.Right Transparent)
+		// Child padding specifies the number of pixels betwen children
+		(Panel.ChildPadding 4)
+		
+		// Expand the panel horizontally and vertically to match the parent.
+		(Panel.ExpandH)
+		(Panel.ExpandV)
+		
+		// We dont need any padding here, so set all to zero
+		(#Recti Panel.Padding 0 0 0 0)
+		:
+		
+		(RadioButtons 
+			([] Group Button.UI Button.Graphics Button.Audio Button.Gameplay Button.Multiplayer Button.PlutoNinja)
+			(Navigate Vertical)
+			(Default Button.Graphics)
+			(Panel.Description OptionCategories)
+			(Panel.NavRight GameOptionsInnerDiv)
+			(Panel.NavDown GameOptionsFinalization)
+			(Panel.Layout TopToBottom)
+			(Panel.AcceptsFocus)
+			(Panel.FixedWidth 20%)
+			(Panel.ExpandV)
+			(Panel.ChildPadding 4)
+			(#Recti Panel.Padding 4 0 0 0)
+			(Colour.Container.Background Transparent)
+			(Colour.Button.Shadow Black)
+			(Colour.Button TabButtonBackground )
+			(Colour.Button.Edge.Top.Left TabButtonTopLeftHilight)
+			(Colour.Button.Edge.Bottom.Right TabButtonBottomRightHilight)
+			:
+			
+			(Tab 
+				(For Button.Graphics)
+				(Toggles GameOptions.Graphics)
+			)
+				
+			(Button
+				(Panel.NavRight GameOptionsInnerDiv)
+				(Meta Button.Graphics)
+				(#Recti Panel.Padding 8 0 0 8)
+				(Panel.ExpandH)
+				(FitTextV)
+				(Font OptionButtonFont)
+				(#Vec2i Text.Spacing 8 0)
+				(Text.Alignment Left)
+				(Text Graphics)
+			)
+			
+			(Tab 
+				(For Button.UI)
+				(Toggles GameOptions.UI)
+			)
+			
+			(Button
+				(Panel.NavRight GameOptionsInnerDiv)
+				(Meta Button.UI)
+				(#Recti Panel.Padding 8 0 0 8)
+				(Panel.ExpandH)
+				(FitTextV)
+				(Font OptionButtonFont)
+				(#Vec2i Text.Spacing 8 0)
+				(Text.Alignment Left)
+				(Text UI)	
+			)
+			
+			(Tab 
+				(For Button.Audio)
+				(Toggles GameOptions.Audio)
+			)
+			
+			(Button
+				(Panel.NavRight GameOptionsInnerDiv)
+				(Meta Button.Audio)
+				(#Recti Panel.Padding 8 0 0 8)
+				(Panel.ExpandH)
+				(FitTextV)
+				(Font OptionButtonFont)
+				(#Vec2i Text.Spacing 8 0)
+				(Text.Alignment Left)
+				(Text Audio)	
+			)
+			
+			(Tab 
+				(For Button.Gameplay)
+				(Toggles GameOptions.Gameplay)
+			)
+			
+			(Button
+				(Panel.NavRight GameOptionsInnerDiv)
+				(Meta Button.Gameplay)
+				(#Recti Panel.Padding 8 0 0 8)
+				(Panel.ExpandH)
+				(FitTextV)
+				(Font OptionButtonFont)
+				(#Vec2i Text.Spacing 8 0)
+				(Text.Alignment Left)
+				(Text Gameplay)	
+			)
+			
+			(Tab 
+				(For Button.Multiplayer)
+				(Toggles GameOptions.Multiplayer)
+			)
+			
+			(Button
+				(Panel.NavRight GameOptionsInnerDiv)
+				(Meta Button.Multiplayer)
+				(#Recti Panel.Padding 8 0 0 8)
+				(Panel.ExpandH)
+				(FitTextV)
+				(Font OptionButtonFont)
+				(#Vec2i Text.Spacing 8 0)
+				(Text.Alignment Left)
+				(Text Multiplayer)	
+			)
+			
+			(Tab 
+				(For Button.PlutoNinja)
+				(Toggles GameOptions.PlutoNinja)
+			)
+			
+			(Button
+				(Panel.NavRight GameOptionsInnerDiv)
+				(Meta Button.PlutoNinja)
+				(#Recti Panel.Padding 8 0 0 8)
+				(Panel.ExpandH)
+				(FitTextV)
+				(Font OptionButtonFont)
+				(#Vec2i Text.Spacing 8 0)
+				(Text.Alignment Left)
+				(Text "PlutoNinja 2.0")	
+			)
+		)
+		
+		(Div
+			(Panel.Description GameOptionsOuterDiv)
+			(Panel.Layout LeftToRight)
+			(Panel.ExpandH)
+			(Panel.ExpandV)
+			(Colour.Container.Background Transparent)
+			(Colour.Button Yellow)
+			(Colour.Slider.Slot.Edge.1 White)
+			(Colour.Slider.Slot.Edge.2 LightGrey)
+			:
+			
+			// A viewport has a client area that is offset by a scroll bar. The scroll range allows us to navigate to and from any offscreen elements
+			(Viewport
+				(Panel.Description GameOptionsInnerDiv)
+				(Colour.Background Translucent)
+				(Colour.Container.Top.Left White)
+				(Colour.Container.Bottom.Right LightGrey)
+				// Define the client area rect style when a vertical scroller is visible
+				(Viewport.RectStyle.Scrollable Sharp)
+				
+				// Define the client area rect style when the vertical scroller is invisible (scrolling not required)
+				(Viewport.Rectstyle.NotScrollable Rounded)
+				(Panel.CornerRadius 16)
+				(Panel.AcceptsFocus)
+				(Panel.OcclusionSurface true)
+				(Panel.ExpandH)
+				(Panel.ExpandV)
+				(Panel.NavDown GameOptionsFinalization)
+				(Panel.NavLeft OptionCategories)
+				(Colour.Carousel.Top.Left LightGrey)
+				(Colour.Carousel.Bottom.Right LightGrey)
+				(Colour.Carousel.DropDown Black)
+				(Colour.GameOption.Top.Left Transparent)
+				(Colour.GameOption.Bottom.Right Transparent)
+				(Colour.GameOption.Background Transparent)
+				(Colour.GameOption.ChildSpacer DarkGrey)
+				(Colour.GameOption.Disabled.Background Transparent)
+				(Colour.GameOption.Disabled.Text DarkGrey)
+				(Colour.Label Transparent)
+				(Colour.Editor DarkRed)
+				(Colour.Slider.Guage LightGrey)
+				(Colour.Slider.Slot DarkRed)
+				(Colour.Slider.Slot.Edge.1 FeintWhite)
+				(Colour.Slider.Slot.Edge.2 FeintGrey)
+				(Colour.Occlusion.Surface FeintBlack)
+				:
+				(Viewport.ClientArea
+					(Panel.Layout TopToBottom)
+					(Colour.Background Transparent)
+					(Colour.Container.Background Transparent)
+				)
+				
+				(Viewport.Offset
+					(Colour.Background Transparent)
+					(Colour.Container.Background Transparent)
+					(Colour.Container.Top.Left Transparent)
+					(Colour.Container.Bottom.Right Transparent)
+				)
+			
+				// GameOptions contains a procedurally generated list of controls for changing game options
+				(GameOptions 
+					(Panel.Description GameOptions.Graphics)
+					(Title.Style TitlesOnLeft)
+					(Title.Alignment Left)
+					(Title.Font SubOptionTitleFont)
+					(SubscribeToCommitButtons) 
+					
+					(#Recti Panel.Padding 0 8 0 8)
+					
+					// Multiplies the title font height to yield the title control height. (For TitleOnLeft this will define the row height)
+					(Title.HeightMultiplier 2.00)
+					
+					// Multiplies the title font height to yield the title x spacing.
+					(Title.XSpacingMultiplier 0.25)
+					
+					// Gives the padding of the carousel controls to their interior rectangle
+					(#Recti Carousel.Padding 40 2 40 4)
+					
+					// Gives the padding of the carousel controls to their interior rectangle
+					(#Recti Carousel.Button.Padding 4 4 4 4)
+					
+					// Determine which side of the control the numeric feedback is rendered at
+					(Scalar.Guage.Alignment Centre)
+					
+					// Offset from alignment edge to guage
+					(#Vec2i Scalar.Guage.Spacing 12 4)
+					
+					// Gives the padding of the slider control slot to the slider control edges
+					(#Recti Scalar.Slot.Padding 40 10 40 10)
+					
+					(Carousel.Font CarouselFont)
+					(Carousel.Button.Font CarouselFont)
+					(Slider.Font SliderFont)
+				
+					// The Generate attribute determines which options are used to generate the children
+					(Generate GraphicsOptions)
+				)
+				
+				(GameOptions 
+					(Panel.Description GameOptions.Audio)
+					(Title.Style TitlesOnLeft)
+					(Title.Alignment Left)
+					(Title.Font SubOptionTitleFont)
+					(SubscribeToCommitButtons) 
+					
+					// Multiplies the title font height to yield the title control height. (For TitleOnLeft this will define the row height)
+					(Title.HeightMultiplier 1.75)
+					
+					// Multiplies the title font height to yield the title x spacing.
+					(Title.XSpacingMultiplier 0.25)
+					
+					// Gives the padding of the carousel controls to their interior rectangle
+					(#Recti Carousel.Padding 40 2 40 4)
+					
+					// Gives the padding of the carousel controls to their interior rectangle
+					(#Recti Carousel.Button.Padding 4 4 4 4)
+					
+					// Determine which side of the control the numeric feedback is rendered at
+					(Scalar.Guage.Alignment Left)
+					
+					// Offset from alignment edge to guage
+					(#Vec2i Scalar.Guage.Spacing 12 4)
+					
+					// Gives the padding of the slider control slot to the slider control edges
+					(#Recti Scalar.Slot.Padding 50 2 40 2)
+					
+					(Carousel.Font CarouselFont)
+					(Carousel.Button.Font CarouselFont)
+					(Slider.Font SliderFont)
+					
+					// We provide an example here of the override the bulb count (default = 20)
+					(Slider.Bulb.Count 25)
+					
+					// We provide an example here of the override the bulb gaps (default dx=6 dy=6)
+					(#Vec2i Slider.Bulb.Gaps 3 3)
+					
+				
+					// The Generate attribute determines which options are used to generate the children
+					(Generate AudioOptions)
+				)
+				
+				(GameOptions 
+					(Panel.Description GameOptions.UI)
+					(Title.Style TitlesOnLeft)
+					(Title.Alignment Left)
+					(Title.Font SubOptionTitleFont)
+					(SubscribeToCommitButtons) 
+					
+					// Multiplies the title font height to yield the title control height. (For TitleOnLeft this will define the row height)
+					(Title.HeightMultiplier 1.75)
+					
+					// Multiplies the title font height to yield the title x spacing.
+					(Title.XSpacingMultiplier 0.25)
+					
+					// Gives the padding of the carousel controls to their interior rectangle
+					(#Recti Carousel.Padding 40 2 40 4)
+					
+					// Gives the padding of the carousel controls to their interior rectangle
+					(#Recti Carousel.Button.Padding 4 4 4 4)
+					
+					// Determine which side of the control the numeric feedback is rendered at
+					(Scalar.Guage.Alignment Left)
+					
+					// Offset from alignment edge to guage
+					(#Vec2i Scalar.Guage.Spacing 12 4)
+					
+					// Gives the padding of the slider control slot to the slider control edges
+					(#Recti Scalar.Slot.Padding 40 2 40 2)
+					
+					(Carousel.Font CarouselFont)
+					(Carousel.Button.Font CarouselFont)
+					(Slider.Font SliderFont)
+				
+					// The Generate attribute determines which options are used to generate the children
+					(Generate UIOptions)
+				)
+				
+				(GameOptions 
+					(Panel.Description GameOptions.Gameplay)
+					(Title.Style TitlesOnLeft)
+					(Title.Alignment Left)
+					(Title.Font SubOptionTitleFont)
+					(SubscribeToCommitButtons) 
+					
+					// Multiplies the title font height to yield the title control height. (For TitleOnLeft this will define the row height)
+					(Title.HeightMultiplier 1.75)
+					
+					// Multiplies the title font height to yield the title x spacing.
+					(Title.XSpacingMultiplier 0.25)
+					
+					// Gives the padding of the carousel controls to their interior rectangle
+					(#Recti Carousel.Padding 40 2 40 4)
+					
+					// Gives the padding of the carousel controls to their interior rectangle
+					(#Recti Carousel.Button.Padding 4 4 4 4)
+					
+					// Determine which side of the control the numeric feedback is rendered at
+					(Scalar.Guage.Alignment Centre)
+					
+					// Offset from alignment edge to guage
+					(#Vec2i Scalar.Guage.Spacing 12 4)
+					
+					// Gives the padding of the slider control slot to the slider control edges
+					(#Recti Scalar.Slot.Padding 40 4 40 4)
+					
+					// Gives the padding of the string control slot to the string control edges
+					(#Recti String.Slot.Padding 40 4 40 4)
+					
+					
+					(Carousel.Font CarouselFont)
+					(Carousel.Button.Font CarouselFont)
+					(Slider.Font SliderFont)
+				
+					// The Generate attribute determines which options are used to generate the children
+					(Generate GameplayOptions)
+				)
+				
+				(GameOptions 
+					(Panel.Description GameOptions.Multiplayer)
+					(Title.Style TitlesOnLeft)
+					(Title.Alignment Left)
+					(Title.Font SubOptionTitleFont)
+					(SubscribeToCommitButtons) 
+					
+					// Multiplies the title font height to yield the title control height. (For TitleOnLeft this will define the row height)
+					(Title.HeightMultiplier 1.75)
+					
+					// Multiplies the title font height to yield the title x spacing.
+					(Title.XSpacingMultiplier 0.25)
+					
+					// Gives the padding of the carousel controls to their interior rectangle
+					(#Recti Carousel.Padding 40 2 40 4)
+					
+					// Gives the padding of the carousel controls to their interior rectangle
+					(#Recti Carousel.Button.Padding 4 4 4 4)
+					
+					// Determine which side of the control the numeric feedback is rendered at
+					(Scalar.Guage.Alignment Centre)
+					
+					// Offset from alignment edge to guage
+					(#Vec2i Scalar.Guage.Spacing 12 4)
+					
+					// Gives the padding of the slider control slot to the slider control edges
+					(#Recti Scalar.Slot.Padding 40 2 40 2)
+					
+					(Carousel.Font CarouselFont)
+					(Carousel.Button.Font CarouselFont)
+					(Slider.Font SliderFont)
+				
+					// The Generate attribute determines which options are used to generate the children
+					(Generate MultiplayerOptions)
+				)
+				
+				(GameOptions 
+					(Panel.Description GameOptions.PlutoNinja)
+					(Title.Style TitlesOnLeft)
+					(Title.Alignment Left)
+					(Title.Font SubOptionTitleFont)
+					(SubscribeToCommitButtons) 
+					
+					// Multiplies the title font height to yield the title control height. (For TitleOnLeft this will define the row height)
+					(Title.HeightMultiplier 1.75)
+					
+					// Multiplies the title font height to yield the title x spacing.
+					(Title.XSpacingMultiplier 0.25)
+					
+					// Gives the padding of the carousel controls to their interior rectangle
+					(#Recti Carousel.Padding 40 2 40 4)
+					
+					// Gives the padding of the carousel controls to their interior rectangle
+					(#Recti Carousel.Button.Padding 4 4 4 4)
+					
+					// Determine which side of the control the numeric feedback is rendered at
+					(Scalar.Guage.Alignment Left)
+					
+					// Offset from alignment edge to guage
+					(#Vec2i Scalar.Guage.Spacing 12 4)
+					
+					// Gives the padding of the slider control slot to the slider control edges
+					(#Recti Scalar.Slot.Padding 40 2 40 2)
+					
+					(Carousel.Font CarouselFont)
+					(Carousel.Button.Font CarouselFont)
+					(Slider.Font SliderFont)
+				
+					// The Generate attribute determines which options are used to generate the children
+					(Generate PlutoNinja)
+				)
+			)
+			
+			(Div 
+				(Panel.Description "CentreRightSpacer")
+				(Panel.FixedWidth 25%)
+				(Panel.FixedHeight 40%)
+			)
+		)
+	)
+	
+	(Div
+		(Panel.Description SpaceBelowCentre)
+		(Panel.FixedHeight 10%)
+	)
+	
+	(Div
+		(Panel.Description GameOptionsFinalization)
+		(Panel.NavUp OptionCategories)
+		(Panel.NavDown ButtonAccept)
+		(Panel.FixedHeight 60)
+		(Panel.ExpandH)
+		(Panel.AcceptsFocus)
+		(Panel.Layout LeftToRight)
+		(Panel.ChildPadding 20)
+		(Colour.Button TranslucentButton)
+		(Colour.Container.Background Transparent)
+		(Colour.Button.Shadow Transparent)
+		:
+		
+		(Button
+			(Panel.Description ButtonAccept)
+			(Panel.NavUp GameOptionsFinalization)			
+			(Panel.NavRight ButtonRevert)
+			(Panel.RectStyle Rounded)
+			(Panel.CornerRadius 4)
+			(Panel.Hint "Click to commit the option changes.")
+			(#Recti Panel.Padding 8 6 8 6)
+			(FitTextV)
+			(FitTextH)
+			(Font SubOptionTitleFont)
+			(Text Accept)	
+			(#Vec2i Text.Spacing 0 2)
+			(ClickWhen DownThenUp)
+		)
+		
+		(Button
+			(Panel.Description ButtonRevert)
+			(Panel.NavUp GameOptionsFinalization)
+			(Panel.NavLeft ButtonAccept)
+			(Panel.NavRight ButtonBack)
+			(Panel.RectStyle Rounded)
+			(Panel.CornerRadius 4)
+			(Panel.Hint "Click to revert the recently changed option changes.")
+			(#Recti Panel.Padding 8 6 8 6)
+			(FitTextV)
+			(FitTextH)
+			(Font SubOptionTitleFont)
+			(#Vec2i Text.Spacing 0 2)
+			(Text Revert)
+			(ClickWhen DownThenUp)
+		)
+		
+		(Button
+			(Panel.Description ButtonBack)
+			(Panel.NavUp GameOptionsFinalization)
+			(Panel.NavLeft ButtonRevert)
+			(Panel.RectStyle Rounded)
+			(Panel.CornerRadius 4)
+			(Panel.Hint "Return to the game screen")
+			(#Recti Panel.Padding 8 6 8 6)
+			(FitTextV)
+			(FitTextH)
+			(Font SubOptionTitleFont)
+			(#Vec2i Text.Spacing 0 2)
+			(Text Back)	
+			(ClickWhen DownThenUp)
+		)
+		
+		(Div
+			(Panel.Description SpaceFromBackToHint)
+			(FixedWidth 25%)
+		)
+		
+		(HintBox
+			(Panel.ExpandH)
+			(Panel.ExpandV)
+			(#Vec2i Text.Spacing 8 0)
+			(Text.Alignment Left)
+			(Text.Font HintFont)
+		)
+	)
+	
+	// This appears when the keyboard or XBOX gamepad is used.
+	(ControlPrompt
+		(Panel.Description ControlPrompt)
+		(Panel.FixedHeight 40)
+		(Panel.FixedWidth 80%)
+		(Colour.Container.Background Transparent)
+		(Colour.Label.Shadow Black)
+		(Font SubOptionTitleFont)
+		(AlignRight)
+		:
+		// Define the icons for the XBOX controller. Legal types are XBOX and Keyboard
+		(DefIcon
+			(Icon dpad)
+			(For XBOX)
+			(Path  !textures/prompts/xbox/dpad.NSEW.tiff)
+		)
+		
+		(DefIcon
+			(Icon activate)
+			(For XBOX)
+			(VPadding 8)
+			(Path  !textures/prompts/xbox/button.A.tiff)
+		)
+		
+		(DefIcon
+			(Icon back)
+			(For XBOX)
+			(VPadding 8)
+			(Path  !textures/prompts/xbox/button.B.tiff)
+		)
+		
+		// <a href="https://www.flaticon.com/free-icons/gaming" title="gaming icons">Gaming icons created by meaicon - Flaticon</a>
+		// <a href="https://www.flaticon.com/free-icons/keyboard-key" title="keyboard key icons">Keyboard key icons created by littleicon - Flaticon</a>
+		
+		(DefIcon
+			(Icon dpad)
+			(For Keyboard)
+			(Path  !textures/prompts/keyboard/cursor-pad.tiff)
+		)
+		
+		(DefIcon
+			(Icon activate)
+			(For Keyboard)
+			(VPadding 6)
+			(Path  !textures/prompts/keyboard/return.tiff)
+		)
+		
+		(DefIcon
+			(Icon back)
+			(For Keyboard)
+			(VPadding 6)
+			(Path  !textures/prompts/keyboard/escape.tiff)
+		)
+		
+		// List the prompts that appear, with icons and descriptions for each
+		(Prompt
+			(Icon dpad)
+			(Text "- navigate between panels, ")
+		)
+		
+		(Prompt
+			(Icon activate)
+			(Text "- activate, ")
+		)
+		
+		(Prompt
+			(Icon back)
+			(Text "- back")
+		)
+	)
+)

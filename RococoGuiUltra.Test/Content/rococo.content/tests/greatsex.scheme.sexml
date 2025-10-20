@@ -1,0 +1,269 @@
+(Scheme :
+	// This reads as Apply the colour defs to the states specified by their bit combinations. (None of which contained the hovered bit)
+	// Since we have not specified the hovered bit, then this colour scheme applies to all situations that are *not* hovered
+	(ApplyTo ([] RenderStates pressed focused))
+	(ApplyTo ([] RenderStates pressed))
+	(ApplyTo ([] RenderStates focused))
+	(ApplyTo ([] RenderStates default))
+	(Colour.Container.Background (Red 0)(Green 0)(Blue 0)(Alpha 255))
+	(Colour.Label (Red 0)(Green 0)(Blue 0)(Alpha 255))
+	(Colour.Carousel.Background (Red 0)(Green 0)(Blue 0)(Alpha 255))
+	(Colour.Carousel.Text (Red 224)(Green 224)(Blue 0)(Alpha 255))
+	(Colour.Carousel.DropDown.Text (Red 128)(Green 128)(Blue 48)(Alpha 255))
+	(Colour.Portrait.Band (Red 224)(Green 224)(Blue 255)(Alpha 255))
+)
+(Scheme :
+	// This reads as Apply the colour defs to the states specified by their bit combinations. (All of which contain the hovered bit)
+	// Since we have specified the hovered bit in all permutations, then this colour scheme applies to all situations that *are* hovered
+	(ApplyTo ([] RenderStates hovered pressed))
+	(ApplyTo ([] RenderStates hovered pressed focused))
+	(ApplyTo ([] RenderStates hovered focused))
+	(ApplyTo ([] RenderStates hovered))
+	(Colour.Container.Background (Red 0)(Green 0)(Blue 0)(Alpha 255))
+	(Colour.Label (Red 0)(Green 0)(Blue 0)(Alpha 255))
+	(Colour.Carousel.Background (Red 32)(Green 32)(Blue 32)(Alpha 255))
+	(Colour.Carousel.Text (Red 255)(Green 255)(Blue 0)(Alpha 255))
+	(Colour.Carousel.DropDown.Text (Red 255)(Green 255)(Blue 255)(Alpha 255))
+	(Colour.Portrait.Band (Red 224)(Green 224)(Blue 255)(Alpha 255))
+)
+
+
+// An example here of micromanaging colours according to hovered, pressed and focused states
+(Colour 
+	(Id Transparent2)
+	:
+	(Spec 
+		([] For pressed)
+		(Red 0)(Green 0)(Blue 0)(Alpha 0)
+	)
+	
+	(Spec 
+		([] For focused)
+		(Red 0)(Green 0)(Blue 0)(Alpha 0)
+	)
+	
+	(Spec 
+		([] For default)
+		(Red 0)(Green 0)(Blue 0)(Alpha 0)
+	)
+	
+	(Spec 
+		([] For pressed focused)
+		(Red 0)(Green 0)(Blue 0)(Alpha 0)
+	)
+	
+	(Spec 
+		([] For hovered pressed)
+		(Red 0)(Green 0)(Blue 0)(Alpha 0)
+	)
+	
+	(Spec 
+		([] For hovered focused)
+		(Red 0)(Green 0)(Blue 0)(Alpha 0)
+	)
+	
+	(Spec 
+		([] For hovered pressed focused)
+		(Red 0)(Green 0)(Blue 0)(Alpha 0)
+	)
+	
+	(Spec 
+		([] For hovered)
+		(Red 0)(Green 0)(Blue 0)(Alpha 0)
+	)
+)
+
+// An example here of micromanaging colours according to hovered, pressed and focused states
+(Colour 
+	(Id TabButtonTopLeftHilight)
+	:
+	(Spec 
+		([] For pressed)
+		(Red 0)(Green 0)(Blue 0)(Alpha 255)
+	)
+	
+	(Spec 
+		([] For focused)
+		(Red 0)(Green 0)(Blue 0)(Alpha 0)
+	)
+	
+	(Spec 
+		([] For default)
+		(Red 0)(Green 0)(Blue 0)(Alpha 0)
+	)
+	
+	(Spec 
+		([] For pressed focused)
+		(Red 0)(Green 0)(Blue 0)(Alpha 255)
+	)
+	
+	(Spec 
+		([] For hovered pressed)
+		(Red 160)(Green 160)(Blue 160)(Alpha 255)
+	)
+	
+	(Spec 
+		([] For hovered focused)
+		(Red 160)(Green 160)(Blue 160)(Alpha 255)
+	)
+	
+	(Spec 
+		([] For hovered pressed focused)
+		(Red 160)(Green 160)(Blue 160)(Alpha 255)
+	)
+	
+	(Spec 
+		([] For hovered)
+		(Red 160)(Green 160)(Blue 160)(Alpha 255)
+	)
+)
+
+(Colour 
+	(Id TabButtonBottomRightHilight)
+	:
+	(Spec 
+		([] For pressed)
+		(Red 0)(Green 0)(Blue 0)(Alpha 255)
+	)
+	
+	(Spec 
+		([] For focused)
+		(Red 0)(Green 0)(Blue 0)(Alpha 0)
+	)
+	
+	(Spec 
+		([] For default)
+		(Red 0)(Green 0)(Blue 0)(Alpha 0)
+	)
+	
+	(Spec 
+		([] For pressed focused)
+		(Red 0)(Green 0)(Blue 0)(Alpha 255)
+	)
+	
+	(Spec 
+		([] For hovered pressed)
+		(Red 128)(Green 128)(Blue 128)(Alpha 255)
+	)
+	
+	(Spec 
+		([] For hovered focused)
+		(Red 128)(Green 128)(Blue 128)(Alpha 255)
+	)
+	
+	(Spec 
+		([] For hovered pressed focused)
+		(Red 128)(Green 128)(Blue 128)(Alpha 255)
+	)
+	
+	(Spec 
+		([] For hovered)
+		(Red 128)(Green 128)(Blue 128)(Alpha 255)
+	)
+)
+
+(Colour 
+	(Id TabButtonBackground)
+	:
+	(Spec 
+		([] For pressed)
+		(Red 0)(Green 0)(Blue 0)(Alpha 64)
+	)
+	
+	(Spec 
+		([] For focused)
+		(Red 0)(Green 0)(Blue 0)(Alpha 0)
+	)
+	
+	(Spec 
+		([] For default)
+		(Red 0)(Green 0)(Blue 0)(Alpha 0)
+	)
+	
+	(Spec 
+		([] For pressed focused)
+		(Red 0)(Green 0)(Blue 0)(Alpha 64)
+	)
+	
+	(Spec 
+		([] For hovered pressed)
+		(Red 0)(Green 0)(Blue 0)(Alpha 64)
+	)
+	
+	(Spec 
+		([] For hovered focused)
+		(Red 0)(Green 0)(Blue 0)(Alpha 0)
+	)
+	
+	(Spec 
+		([] For hovered pressed focused)
+		(Red 0)(Green 0)(Blue 0)(Alpha 64)
+	)
+	
+	(Spec 
+		([] For hovered)
+		(Red 0)(Green 0)(Blue 0)(Alpha 0)
+	)
+)
+
+(Colour 
+	(Id TranslucentButton)
+	:
+	(Spec 
+		([] For pressed)
+		(Red 64)(Green 64)(Blue 64)(Alpha 192)
+	)
+	
+	(Spec 
+		([] For focused)
+		(Red 0)(Green 0)(Blue 0)(Alpha 192)
+	)
+	
+	(Spec 
+		([] For default)
+		(Red 0)(Green 0)(Blue 0)(Alpha 192)
+	)
+	
+	(Spec 
+		([] For pressed focused)
+		(Red 64)(Green 64)(Blue 64)(Alpha 192)
+	)
+	
+	(Spec 
+		([] For hovered pressed)
+		(Red 64)(Green 64)(Blue 64)(Alpha 192)
+	)
+	
+	(Spec 
+		([] For hovered focused)
+		(Red 255)(Green 0)(Blue 0)(Alpha 192)
+	)
+	
+	(Spec 
+		([] For hovered pressed focused)
+		(Red 255)(Green 64)(Blue 64)(Alpha 192)
+	)
+	
+	(Spec 
+		([] For hovered)
+		(Red 255)(Green 0)(Blue 0)(Alpha 192)
+	)
+)
+
+(Colour (Id Transparent)([] Uniform.RGBAb     0   0   0   0))
+(Colour (Id DarkBlue)	([] Uniform.RGBAb     0   0  64	255))
+(Colour (Id DarkRed)	([] Uniform.RGBAb     64  0   0	255))
+(Colour (Id Black)		([] Uniform.RGBAb     0   0   0	255))
+(Colour (Id Translucent)([] Uniform.RGBAb     0   0   0	192))
+(Colour (Id LightGrey)  ([] Uniform.RGBAb   192 192 192 255))
+(Colour (Id DarkGrey)   ([] Uniform.RGBAb    64 64 64 255))
+(Colour (Id White)  ([] Uniform.RGBAb       255 255 255 255))
+(Colour (Id Yellow)  ([] Uniform.RGBAb      255 255 128 255))
+(Colour (Id FeintWhite) ([] Uniform.RGBAb   255 255 255 64))
+(Colour (Id FeintBlack) ([] Uniform.RGBAb     0   0   0 64))
+(Colour (Id FeintGrey)  ([] Uniform.RGBAb   192 192 192 64))
+
+(Colour (Id gfTopLeft)     ([] Uniform.RGBAb   0  0   0   0))
+(Colour (Id gfTopRight)    ([] Uniform.RGBAb   0  0   0 255))
+(Colour (Id gfBottomLeft)  ([] Uniform.RGBAb   0  0   0   0))
+(Colour (Id gfBottomRight) ([] Uniform.RGBAb   0  0   0 255))
